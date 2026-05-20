@@ -1,0 +1,28 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: dms-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: documentdb
+      POSTGRES_USER: dmsuser
+      POSTGRES_PASSWORD: dmspass
+      # 1M kayıt için biraz daha cömert paylaşımlı bellek
+      POSTGRES_SHARED_BUFFERS: 256MB
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./docker/postgres/init.sql:/docker-entrypoint-initdb.d/01-init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dmsuser -d documentdb"]
+      interval: 3s
+      timeout: 3s
+      retries: 10
+
+  # NOT: API'yi bilerek compose'a koymadım.
+  # Dev döngüsünde "dotnet run" her seferinde rebuild + restart açısından çok daha hızlı.
+  # Prod paketleme istenirse buraya bir 'api' servisi eklenebilir.
+
+volumes:
+  postgres_data:

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Doküman Yönetim Sistemi</title>
+    <link rel="stylesheet" href="styles.css" />
+
+    <!-- Tarayıcıda derleme: build adımı kullanmıyoruz, prototip tek-komut çalışsın. -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- Yardımcı kütüphaneler: bloom filter (C# ile aynı hash), IDB cache, SHA-256, suggest -->
+    <script src="lib/bloom-filter.js"></script>
+    <script src="lib/idb-cache.js"></script>
+    <script src="lib/hash.js"></script>
+    <script src="lib/suggest.js"></script>
+</head>
+<body>
+    <div id="root">
+        <div style="padding:48px;text-align:center;color:#64748b;font-family:system-ui">
+            Yükleniyor…
+        </div>
+    </div>
+    <script type="text/babel" data-presets="env,react" src="app.js"></script>
+</body>
+</html>
